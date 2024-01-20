@@ -1,8 +1,19 @@
 import React from "react"
-import fakeData from "../data/fakeData"
+import { useEffect, useState } from "react"
 import { Container, Table } from "react-bootstrap"
+import axios from "axios"
 
 const Bookings = () => {
+	const [bookings, setBookings] = useState([])
+
+	useEffect(() => {
+		const fetchBookings = async () => {
+			const { data } = await axios.get("api/bookings")
+			setBookings(data)
+		}
+		fetchBookings()
+	}, [])
+
 	return (
 		<Container
 			className='d-flex justify-content-center align-items-center'
@@ -24,7 +35,7 @@ const Bookings = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{fakeData.map((booking) => (
+						{bookings.map((booking) => (
 							<tr key={booking.id}>
 								<td>{booking.id}</td>
 								<td>{booking.title}</td>
