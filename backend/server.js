@@ -1,7 +1,9 @@
 import express from "express"
+import dotenv from "dotenv"
+dotenv.config()
 import bookings from "../backend/data/fakeData.js"
 
-const port = 5000
+const port = process.env.PORT || 6000
 const app = express()
 
 app.get("/", (req, res) => {

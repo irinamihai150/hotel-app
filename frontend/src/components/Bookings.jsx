@@ -1,5 +1,4 @@
-import React from "react"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Container, Table } from "react-bootstrap"
 import axios from "axios"
 
@@ -8,20 +7,22 @@ const Bookings = () => {
 
 	useEffect(() => {
 		const fetchBookings = async () => {
-			const { data } = await axios.get("api/bookings")
-			setBookings(data)
+			try {
+				const { data } = await axios.get("api/bookings")
+				setBookings(data)
+			} catch (error) {
+				console.error("Error fetching bookings:", error)
+			}
 		}
+
 		fetchBookings()
 	}, [])
 
 	return (
-		<Container
-			className='d-flex justify-content-center align-items-center'
-			// style={{ minHeight: "100vh" }}
-		>
-			<div className='text-center'>
+		<Container className='d-flex justify-content-center align-items-center'>
+			<div className='text-center' style={{ overflowX: "auto" }}>
 				<h2>Bookings</h2>
-				<Table striped bordered hover>
+				<Table striped bordered hover responsive>
 					<thead>
 						<tr>
 							<th>ID</th>
