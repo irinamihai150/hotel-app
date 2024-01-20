@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Container, Table } from "react-bootstrap"
 import axios from "axios"
+import SearchButton from "./Search.jsx"
 
 const Bookings = () => {
 	const [bookings, setBookings] = useState([])
+	const [selectedBooking, setSelectedBooking] = useState(null)
 
 	useEffect(() => {
 		const fetchBookings = async () => {
@@ -18,14 +20,31 @@ const Bookings = () => {
 		fetchBookings()
 	}, [])
 
+	const handleSearch = async (query) => {
+		try {
+			const response = await axios.get(`/api/bookings/search?query=${query}`)
+			setBookings(response.data)
+			// Reset selectedBooking when performing a new search
+			// setSelectedBooking(null)
+		} catch (error) {
+			console.error("Error searching for booking:", error)
+			setBookings([])
+			setSelectedBooking(null)
+		}
+	}
+
+	const handleBookingClick = (booking) => {
+		setSelectedBooking(booking)
+	}
+
 	return (
 		<Container className='d-flex justify-content-center align-items-center'>
 			<div className='text-center' style={{ overflowX: "auto" }}>
 				<h2>Bookings</h2>
+				<SearchButton onSearch={handleSearch} />
 				<Table striped bordered hover responsive>
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Title</th>
 							<th>First Name</th>
 							<th>Surname</th>
@@ -37,8 +56,7 @@ const Bookings = () => {
 					</thead>
 					<tbody>
 						{bookings.map((booking) => (
-							<tr key={booking.id}>
-								<td>{booking.id}</td>
+							<tr key={booking.id} onClick={() => handleBookingClick(booking)}>
 								<td>{booking.title}</td>
 								<td>{booking.firstName}</td>
 								<td>{booking.surname}</td>
@@ -50,6 +68,20 @@ const Bookings = () => {
 						))}
 					</tbody>
 				</Table>
+
+				{selectedBooking && (
+					<div>
+						<h3>Selected Booking Details:</h3>
+						<p>ID: {selectedBooking.id}</p>
+						<p>Title: {selectedBooking.title}</p>
+						<p>First Name: {selectedBooking.firstName}</p>
+						<p>Surname: {selectedBooking.surname}</p>
+						<p>Email: {selectedBooking.email}</p>
+						<p>Room ID: {selectedBooking.roomId}</p>
+						<p>Check In Date: {selectedBooking.checkInDate}</p>
+						<p>Check Out Date: {selectedBooking.checkOutDate}</p>
+					</div>
+				)}
 			</div>
 		</Container>
 	)
