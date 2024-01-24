@@ -1,7 +1,6 @@
-dotenv.config()
 import express from "express"
 import dotenv from "dotenv"
-import connectDB from "./config/db.js"
+import pool from "./config/db.js"
 import bookingRoutes from "./routes/bookingRoutes.js"
 import path from "path"
 import { fileURLToPath } from "url"
@@ -10,16 +9,17 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const port = process.env.PORT || 6000
-connectDB() //connect to mongodb
+
+dotenv.config()
 const app = express()
 
 app.use("/api/bookings", bookingRoutes)
 
 if (process.env.NODE_ENV === "production") {
-	//set static folder
+	// set static folder
 	app.use(express.static(path.join(__dirname, "../frontend/build")))
 
-	//any route that is not api will be redirected to index.html abs
+	// any route that is not api will be redirected to index.html
 	app.get("*", (req, res) =>
 		res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"))
 	)

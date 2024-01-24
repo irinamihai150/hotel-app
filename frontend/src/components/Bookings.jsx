@@ -11,7 +11,11 @@ const Bookings = () => {
 		const fetchBookings = async () => {
 			try {
 				const { data } = await axios.get("api/bookings")
-				setBookings(data)
+				if (Array.isArray(data)) {
+					setBookings(data)
+				} else {
+					console.error("Invalid data format:", data)
+				}
 			} catch (error) {
 				console.error("Error fetching bookings:", error)
 			}
@@ -55,17 +59,26 @@ const Bookings = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{bookings.map((booking) => (
-							<tr key={booking.id} onClick={() => handleBookingClick(booking)}>
-								<td>{booking.title}</td>
-								<td>{booking.firstName}</td>
-								<td>{booking.surname}</td>
-								<td>{booking.email}</td>
-								<td>{booking.roomId}</td>
-								<td>{booking.checkInDate}</td>
-								<td>{booking.checkOutDate}</td>
+						{bookings.length > 0 ? (
+							bookings.map((booking) => (
+								<tr
+									key={booking.id}
+									onClick={() => handleBookingClick(booking)}
+								>
+									<td>{booking.title}</td>
+									<td>{booking.firstName}</td>
+									<td>{booking.surname}</td>
+									<td>{booking.email}</td>
+									<td>{booking.roomId}</td>
+									<td>{booking.checkInDate}</td>
+									<td>{booking.checkOutDate}</td>
+								</tr>
+							))
+						) : (
+							<tr>
+								<td> No bookings found</td>
 							</tr>
-						))}
+						)}
 					</tbody>
 				</Table>
 
