@@ -4,6 +4,7 @@ import pool from "./config/db.js"
 import bookingRoutes from "./routes/bookingRoutes.js"
 import path from "path"
 import { fileURLToPath } from "url"
+import cors from "cors"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -12,7 +13,7 @@ const port = process.env.PORT || 6000
 
 dotenv.config()
 const app = express()
-
+app.use(cors())
 app.use("/api/bookings", bookingRoutes)
 
 if (process.env.NODE_ENV === "production") {
