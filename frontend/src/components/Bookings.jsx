@@ -10,7 +10,7 @@ const Bookings = () => {
 	useEffect(() => {
 		const fetchBookings = async () => {
 			try {
-				const { data } = await axios.get("api/bookings")
+				const { data } = await axios.get("/api/bookings")
 				if (Array.isArray(data)) {
 					setBookings(data)
 				} else {

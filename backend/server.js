@@ -9,10 +9,12 @@ import cors from "cors"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const port = process.env.PORT || 6000
+const port = process.env.PORT
 
 dotenv.config()
+// const apiBaseURL = process.env.API_BASE_URL
 const app = express()
+
 app.use(cors())
 app.use("/api/bookings", bookingRoutes)
 
