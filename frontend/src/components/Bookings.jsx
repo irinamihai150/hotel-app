@@ -10,7 +10,19 @@ const Bookings = () => {
 	useEffect(() => {
 		const fetchBookings = async () => {
 			try {
-				const { data } = await axios.get("/api/bookings")
+				const response = await axios.get(
+					"http://ec2-54-171-193-90.eu-west-1.compute.amazonaws.com:5000/api/bookings",
+					{
+						headers: {
+							method: "GET",
+							mode: "cors",
+							body: JSON.stringify(),
+							headers: { ContentType: "application/json" },
+						},
+					}
+				)
+				const { data } = response
+				// const { data } = await axios.get("/api/bookings")
 				if (Array.isArray(data)) {
 					setBookings(data)
 				} else {
@@ -26,7 +38,9 @@ const Bookings = () => {
 
 	const handleSearch = async (query) => {
 		try {
-			const response = await axios.get(`/api/bookings/search?query=${query}`)
+			const response = await axios.get(
+				`http://ec2-54-171-193-90.eu-west-1.compute.amazonaws.com:5000/api/bookings/search?query=${query}`
+			)
 			setBookings(response.data)
 			// Reset selectedBooking when performing a new search
 			// setSelectedBooking(null)
