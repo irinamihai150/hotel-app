@@ -28,6 +28,6 @@ jobs:
         with:
           aws-access-key-id: ${{secrets.AWS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCES_KEY}}
-          aws-region: eu-west-1
+          aws-region: ${{secrets.region}}
       - name: Copy to s3
         run: aws s3 sync ./build/. s3://hotelproj
