@@ -14,8 +14,11 @@ const Search = ({ onSearch }) => {
 				placeholder='Enter Name'
 				value={searchTerm}
 				onChange={(e) => setSearchTerm(e.target.value)}
+				style={{ marginLeft: "3px" }}
 			/>
-			<button onClick={handleSearch}>Search</button>
+			<button onClick={handleSearch} style={{ marginLeft: "0.5em" }}>
+				Search
+			</button>
 		</div>
 	)
 }
