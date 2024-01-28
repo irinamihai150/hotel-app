@@ -1,0 +1,25 @@
+# name: Deploy
+
+# on:
+# push:
+# branches:
+# -master
+
+# jobs: build:
+# runs-on: ubuntu-latest
+# steps:
+# - uses: actions/checkout@v3
+# - uses: actions/setup-node@v3
+# - name: Install dependencies
+# run: npm install
+# - name: Build Website
+# run: npm run build
+# - name: Set Aws credentials
+# uses: aws-actions/configure-aws-credentials@v1
+# with:
+# aws-access-key-id: ${{secrets.AWS_KEY_ID}}
+# aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+# aws-region: us-west-1
+# -name:Copy to S3
+# run: aws s3 sync ./build/. s3://hotelproj
+
