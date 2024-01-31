@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 	)
 } else {
 	app.get("/", (req, res) => {
-		res.send("Api is running")
+		res.send("Api is running from a different place  :)")
 	})
 }
 
