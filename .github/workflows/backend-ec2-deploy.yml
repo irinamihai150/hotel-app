@@ -4,28 +4,20 @@ on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   deploy:
+    name: Deploy to EC2 hotel
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout the files
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@6.0.0
-        with:
-          switches: -avzr --delete --exclude=.env --exclude=node_modules/
-          path: ./hotel-app
-          remote_path: ${{secrets.SSH_PATH}}
-          remote_host: ${{secrets.SSH_HOST}}
-          remote_user: ${{secrets.SSH_USER }}
-          remote_key: ${{secrets.SSH_PRIVATE_KEY}}
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: ${{ secrets.SSH_PATH }}
