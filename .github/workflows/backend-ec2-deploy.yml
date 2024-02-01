@@ -27,7 +27,6 @@ jobs:
           path: ./
           remote_path: ${{secrets.SSH_PATH}}
           remote_host: ${{ secrets.SSH_HOST }}
-          remote_port: ${{secrets.SSH_PORT}}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Restart PM2 Server
@@ -36,5 +35,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{secrets.SSH_PORT}}
           script: pm2 backend/server.js
