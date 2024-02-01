@@ -12,10 +12,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: List contents of the current directory
         run: ls -l
-      - name: Change directory to hotel-app
-        run: cd hotel-app
-      - name: List contents of the hotel-app directory
-        run: ls -l
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
