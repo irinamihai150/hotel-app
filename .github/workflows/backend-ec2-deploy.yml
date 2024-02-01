@@ -26,6 +26,6 @@ jobs:
           switches: -avzr --delete --exclude=.env --exclude=node_modules/
           path: ./
           remote_path: ${{secrets.SSH_PATH}}
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_host: ${{secrets.SSH_HOST}}
+          remote_user: ${{secrets.SSH_USER }}
+          remote_key: ${{secrets.SSH_PRIVATE_KEY}}
