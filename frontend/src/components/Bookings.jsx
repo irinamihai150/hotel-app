@@ -22,7 +22,7 @@ const Bookings = () => {
 					}
 				)
 				const { data } = response
-				// const { data } = await axios.get("/api/bookings")
+
 				if (Array.isArray(data)) {
 					setBookings(data)
 				} else {

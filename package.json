@@ -9,7 +9,8 @@
 		"server": "nodemon backend/server.js",
 		"client": "npm start --prefix frontend",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
-		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+		"lint": "eslint ."
 	},
 	"author": "irina",
 	"license": "ISC",
@@ -24,6 +25,7 @@
 	},
 	"devDependencies": {
 		"concurrently": "^8.2.2",
+		"eslint-plugin-react": "^7.33.2",
 		"nodemon": "^3.0.3"
 	}
 }
