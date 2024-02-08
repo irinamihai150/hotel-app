@@ -24,12 +24,10 @@ jobs:
           docker build -t irinamihai150/backendimage:latest .
           docker push irinamihai150/backendimage:latest
 
-      - name: SSH into EC2 Instance
-        uses: appleboy/ssh-action@master
+      - name: SSH into EC2
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          host: ${{ secrets.EC2_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Pull Docker Image on EC2
         run: |
