@@ -31,8 +31,11 @@ jobs:
 
       - name: Pull Docker Image on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_IP }} "cd ~/hotel-app && docker pull irinamihai150/backendimage:latest"
+          ssh -o ubuntu@${{ secrets.EC2_IP }} "cd ~/hotel-app && docker pull irinamihai150/backendimage:latest"
 
       - name: Run Docker Container on EC2
         run: |
-          ssh ubuntu@${{ secrets.EC2_IP }} " cd ~/hotel-app && docker run -d -p 5000:5000 --env-file .env irinamihai150/backendimage:latest"
+           cd ~/hotel-app && docker run -d -p 5000:5000 --env-file .env irinamihai150/backendimage:latest
+
+      - name: Log out from Docker
+        run: docker logout
