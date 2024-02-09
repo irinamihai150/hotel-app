@@ -31,7 +31,7 @@ jobs:
 
       - name: Pull Docker Image on EC2
         run: |
-          ssh ubuntu@${{ secrets.EC2_IP }} "cd ~/hotel-app && docker pull irinamihai150/backendimage:latest"
+          ssh StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_IP }} "cd ~/hotel-app && docker pull irinamihai150/backendimage:latest"
 
       - name: Run Docker Container on EC2
         run: |
