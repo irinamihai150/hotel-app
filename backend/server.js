@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 	)
 } else {
 	app.get("/", (req, res) => {
-		res.send("Api is running from docker image :)")
+		res.send("Api is running from docker :)")
 	})
 }
 
