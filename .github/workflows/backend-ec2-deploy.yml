@@ -35,4 +35,4 @@ jobs:
 
       - name: Run Docker Container on EC2
         run: |
-          ssh ubuntu@${{ secrets.EC2_IP }} " cd ~/hotel-app docker run -d -p 5000:5000 --env-file .env irinamihai150/backendimage:latest"
+          ssh ubuntu@${{ secrets.EC2_IP }} " cd ~/hotel-app && docker run -d -p 5000:5000 --env-file .env irinamihai150/backendimage:latest"
