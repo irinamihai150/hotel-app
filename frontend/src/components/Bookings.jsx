@@ -11,7 +11,7 @@ const Bookings = () => {
 		const fetchBookings = async () => {
 			try {
 				const response = await axios.get(
-					"http://ec2-34-241-194-190.eu-west-1.compute.amazonaws.com:5000/api/bookings",
+					"http://ec2-3-255-191-145.eu-west-1.compute.amazonaws.com:5000/api/bookings",
 					{
 						headers: {
 							method: "GET",
@@ -39,7 +39,7 @@ const Bookings = () => {
 	const handleSearch = async (query) => {
 		try {
 			const response = await axios.get(
-				`http://ec2-34-241-194-190.eu-west-1.compute.amazonaws.com:5000/api/bookings/search?query=${query}`
+				`http://ec2-3-255-191-145.eu-west-1.compute.amazonaws.com:5000/api/bookings/search?query=${query}`
 			)
 			setBookings(response.data)
 			// Reset selectedBooking when performing a new search
